@@ -1,2 +1,0 @@
-# uniWS
-Universiteto WebService projektas
