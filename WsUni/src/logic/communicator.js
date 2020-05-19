@@ -9,7 +9,7 @@ class Communicator {
 		return Promise.try(() => {
 			return req({
 				//cia buvo shop vietoj localhost
-				uri: "http://localhost:3001/shop",
+				uri: "http://shop:3001/shop",
 				json: true
 			});
 		})
@@ -29,7 +29,7 @@ class Communicator {
 		return Promise.try(() => {
 			return req({
 				//cia buvo shop vietoj localhost
-				uri: `http://localhost:3001/shop/${id}`,
+				uri: `http://shop:3001/shop/${id}`,
 				json: true
 			});
 		})
@@ -49,7 +49,7 @@ class Communicator {
 		return Promise.try(() => {
 			return req({
 				//cia buvo shop vietoj localhost
-				uri: `http://localhost:3001/shop/${id}`,
+				uri: `http://shop:3001/shop/${id}`,
 				json: true
 			});
 		})
@@ -60,7 +60,7 @@ class Communicator {
 				await req({
 					method: "DELETE",
 					//cia buvo shop vietoj localhost
-					uri: `http://localhost:3001/shop/${id}`,
+					uri: `http://shop:3001/shop/${id}`,
 					json: true
                 });
                 console.log('body return')

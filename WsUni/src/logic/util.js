@@ -1,3 +1,4 @@
+/*
 var net = require('net');
 module.exports.getIPAddress = function getNetworkIP(callback) {
   var socket = net.createConnection(80, 'www.google.com');
@@ -9,3 +10,5 @@ module.exports.getIPAddress = function getNetworkIP(callback) {
     callback(e, 'error');
   });
 }
+
+*/

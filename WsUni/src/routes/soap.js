@@ -65,7 +65,7 @@ function soapRouter(app) {
 	};
 
 	soap.listen(app, "/wsdl", CommunicatorService, xml, function() {
-		console.log("soap started");
+		console.log("Server started");
 	});
 }
 

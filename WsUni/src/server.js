@@ -10,13 +10,6 @@ const fs           = require('fs');
 const path = require('path')
 const app = express();
 
-if (process.env.NODE_ENV === "dev") {
-	console.log("DEVELOPMENT ENVIRONMENT");
-	app.disable("view cache");
-} else {
-	console.log("PRODUCTION ENVIRONMENT");
-}
-
 // https://expressjs.com/en/api.html
 //define that program will use json format for post data type
 app.use(express.json()); 
@@ -33,7 +26,7 @@ app.use(
 
 // "/" === localhost:3000
 app.get("/", function(req, res, next) {
-	res.send('WebService UNI Atsiskaitymas. API stovi "localhost/api/users"');
+	res.send('WebService UNI Atsiskaitymas.');
 });
 
 //Define procedures to be used before /api is accesed
@@ -53,6 +46,7 @@ app.get("/wsdlfile", function(req,res,next) {
 app.use(errorHandler);
 
 app.listen(3000, function() {
+	console.log("WebService UNI Atsiskaitymas.");
     soapRoutes(app)
 });
 

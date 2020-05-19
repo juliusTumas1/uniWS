@@ -1,13 +1,13 @@
 # uni_rest-api
-##---------------------------
-Mano serviso komandos:
+## ---------------------------
+## Mano serviso komandos:
 
 GET: {  
-    localhost:3000/api/users,  
-    localhost:3000/api/users/:id  
+    localhost/api/users,  
+    localhost/api/users/:id  
 },  
 POST: {  
-    localhost:3000/api/users  
+    localhost/api/users  
     Body:
     {{"id": 4, "first_name": "Juozukas", "balance": 3}}
         {
@@ -18,10 +18,10 @@ POST: {
     }
 }  
 PATCH: {  
-    localhost:3000/api/users/:id  
+    localhost/api/users/:id  
 },  
 PUT: {  
-    localhost:3000/api/users/:id
+    localhost/api/users/:id
     body:
         {
         "id": "5",
@@ -31,23 +31,23 @@ PUT: {
     }  
 }  
 DELETE: {  
-    localhost:3000/api/users/:id  
+    localhost/api/users/:id  
 }  
-##---------------------------
-Komunikacija su kitu servisu:
+## ---------------------------
+## Komunikacija su kitu servisu:
 
 Prekiu islistinimas:
-GET localhost:3000/communicate/items
+GET localhost/communicate/items
 
 Prekes pirkimas
-POST localhost:3000/communicate/item
+POST localhost/communicate/item
 Body: 
 {
   "userId": number,
   "itemId": number
 }
 
-##---------------------------
+## ---------------------------
 
 ## commands to start the rest-api: 
 docker-compose up -d

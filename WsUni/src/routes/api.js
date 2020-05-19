@@ -6,33 +6,6 @@ const Promise = require("bluebird");
 const _ = require("lodash");
 const commWrapper = require('../logic/communicateWrapper')
 
-//Function for validating data
-function dataValidator(req, res, next) {
-	req.body.balance = Number(req.body.balance);
-
-	try {
-		dataStorage.userPropExistValidator(req.body);
-		dataStorage.userPropTypeValidator(req.body);
-	} catch (e) {
-		res.status(400);
-		next(e);
-	}
-
-	next();
-}
-
-//Validation for checking if user exists
-function userExistChecker(req, res, next) {
-	const user = dataStorage.get(req.params.id);
-	if (!user) {
-		res.status(404);
-		throw new Error("User does not exist!");
-	} else {
-		next();
-	}
-}
-
-
 //api/users
 router.get("/users", async function(req, res, next) {
     const usersWithItems = await commWrapper.getUsers()
@@ -45,6 +18,28 @@ router.get("/users/:id", userExistChecker, async function(req, res, next) {
 	const userId = req.params.id;
     const user = await commWrapper.getUser(userId);
 	res.json(user);
+});
+
+
+//Call patch procedure
+router.patch("/users/:id", userExistChecker, dataValidator, function(req, res, next) {
+	const userId = req.params.id;
+	const user = dataStorage.get(userId);
+
+	let updated = dataStorage.update(userId, req.body);
+
+	let json = {};
+	json[userId] = updated;
+	res.json(json);
+});
+
+//Call delete procedure
+router.delete("/users/:id", userExistChecker, function(req, res, next) {
+	const userId = req.params.id;
+
+	dataStorage.del(userId);
+
+	res.json({ deleted: true, id: userId });
 });
 
 //Call post procedure
@@ -74,25 +69,31 @@ router.put("/users/:id", dataValidator, function(req, res, next) {
 	res.end();
 });
 
-//Call patch procedure
-router.patch("/users/:id", userExistChecker, dataValidator, function(req, res, next) {
-	const userId = req.params.id;
-	const user = dataStorage.get(userId);
+//Function for validating data
+function dataValidator(req, res, next) {
+	req.body.balance = Number(req.body.balance);
 
-	let updated = dataStorage.update(userId, req.body);
+	try {
+		dataStorage.userPropExistValidator(req.body);
+		dataStorage.userPropTypeValidator(req.body);
+	} catch (e) {
+		res.status(400);
+		next(e);
+	}
 
-	let json = {};
-	json[userId] = updated;
-	res.json(json);
-});
+	next();
+}
 
-//Call delete procedure
-router.delete("/users/:id", userExistChecker, function(req, res, next) {
-	const userId = req.params.id;
+//Validation for checking if user exists
+function userExistChecker(req, res, next) {
+	const user = dataStorage.get(req.params.id);
+	if (!user) {
+		res.status(404);
+		throw new Error("User does not exist!");
+	} else {
+		next();
+	}
+}
 
-	dataStorage.del(userId);
-
-	res.json({ deleted: true, id: userId });
-});
 
 module.exports = router;

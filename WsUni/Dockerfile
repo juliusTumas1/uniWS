@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
-RUN npm install -g yarn
-RUN yarn
+RUN npm install
+RUN npm run
 
 CMD node ./src/server.js
 

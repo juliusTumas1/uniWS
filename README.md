@@ -1,4 +1,4 @@
-# uni_rest-api3uzd
+# WSuni project
 # Paleidimas
 ```
 docker-compose up
@@ -7,13 +7,14 @@ docker-compose up
 ## Mano serviso komandos:
 
 GET: {  
-    localhost:3000/api/users,  
-    localhost:3000/api/users/:id  
+    localhost/api/users,  
+    localhost/api/users/:id  
 },  
 POST: {  
-    localhost:3000/api/users  
+    localhost/api/users  
     Body:
     {{"id": 4, "first_name": "Juozukas", "balance": 3}}
+    
         {
         "id": "5",
         "first_name": "Testukas",
@@ -22,10 +23,10 @@ POST: {
     }
 }  
 PATCH: {  
-    localhost:3000/api/users/:id  
+    localhost/api/users/:id  
 },  
 PUT: {  
-    localhost:3000/api/users/:id
+    localhost/api/users/:id
     body:
         {
         "id": "5",
@@ -35,16 +36,16 @@ PUT: {
     }  
 }  
 DELETE: {  
-    localhost:3000/api/users/:id  
+    localhost/api/users/:id  
 }  
 ## ---------------------------
 ## Komunikacija su kitu servisu:
 
 Prekiu islistinimas:
-GET localhost:3000/communicate/items
+GET localhost/communicate/items
 
 Prekes pirkimas
-POST localhost:3000/communicate/item
+POST localhost/communicate/item
 Body: 
 {
   "userId": number,
