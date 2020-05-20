@@ -3,7 +3,7 @@ const extend = require("extend");
 
 //Create initial data elements
 const data = {
-	1: { first_name: "Julius", balance: 123, items: [] },
+	1: { first_name: "Julius", balance: 123, items: [{ id: 1 }] },
 	2: { first_name: "Tomas", balance: 555, items: [] },
 	3: { first_name: "Petras", balance: 323, items: [] },
 	4: { first_name: "Tester", balance: 1561, items: [] }

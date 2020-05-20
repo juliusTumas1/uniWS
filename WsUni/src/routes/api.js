@@ -8,7 +8,8 @@ const commWrapper = require('../logic/communicateWrapper')
 
 //api/users
 router.get("/users", async function(req, res, next) {
-    const usersWithItems = await commWrapper.getUsers()
+	const usersWithItems = await commWrapper.getUsers()
+	//res.headers['Id'] = userId;
     res.json(usersWithItems);
 })
 
@@ -16,7 +17,8 @@ router.get("/users", async function(req, res, next) {
 // api/users:id
 router.get("/users/:id", userExistChecker, async function(req, res, next) {
 	const userId = req.params.id;
-    const user = await commWrapper.getUser(userId);
+	const user = await commWrapper.getUser(userId);
+	res.set('ID-key',userId);
 	res.json(user);
 });
 
@@ -30,6 +32,7 @@ router.patch("/users/:id", userExistChecker, dataValidator, function(req, res, n
 
 	let json = {};
 	json[userId] = updated;
+	res.set('ID-key',userId);
 	res.json(json);
 });
 
@@ -38,7 +41,7 @@ router.delete("/users/:id", userExistChecker, function(req, res, next) {
 	const userId = req.params.id;
 
 	dataStorage.del(userId);
-
+	res.set('ID-key',userId);
 	res.json({ deleted: true, id: userId });
 });
 
@@ -48,6 +51,7 @@ router.post("/users", dataValidator, function(req, res, next) {
 
 	let json = {};
 	json[key] = { balance: req.body.balance, first_name: req.body.first_name };
+	res.set('ID-key',key);
 	res.status(201).json(json);
 });
 
@@ -65,7 +69,7 @@ router.put("/users/:id", dataValidator, function(req, res, next) {
 		dataStorage.set(userId, req.body);
 		res.status(201);
 	}
-
+	res.set('ID-key',userId);
 	res.end();
 });
 
@@ -88,12 +92,13 @@ function dataValidator(req, res, next) {
 function userExistChecker(req, res, next) {
 	const user = dataStorage.get(req.params.id);
 	if (!user) {
-		res.status(404);
-		throw new Error("User does not exist!");
+		res.status(406);
+		throw new Error("Method not allowed");
 	} else {
 		next();
 	}
 }
+
 
 
 module.exports = router;
