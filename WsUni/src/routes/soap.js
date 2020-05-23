@@ -56,9 +56,18 @@ function soapRouter(app) {
                     return commWrapper.getUsers()
                 },
                 getUser: function(args, cb) {
-                    console.log('getUser()')
-                    const {userId} = args
-                    return commWrapper.getUser(userId);
+                    console.log('getUser()');
+                    console.log (args);
+                    const {userId} = args;
+                    
+                    if (userId == null || args == NaN) {
+                        console.log('getUsers()')
+                        return commWrapper.getUsers()
+                    }
+                    else
+                    {
+                        return commWrapper.getUser(userId);
+                    }
                 }
 			}
 		}

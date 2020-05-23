@@ -54,9 +54,12 @@ class CommunicateWrapper {
     async getUser(userId) {
         const users = await this.getUsers();
         const kUsers = _.keyBy(users, 'id')
+        console.log("input : " + userId);
+        if (_.isNaN(userId)) {throw new Error("Invalid input");}
+        if(kUsers[userId] == null){throw new Error(`User ${userId} does not exist!`);}
         return kUsers[userId];
     }
-}
+} 
 
 
 module.exports = new CommunicateWrapper();
